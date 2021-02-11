@@ -3,13 +3,12 @@
     <v-row no-gutters>
       <v-col
         v-for="post of posts"
-        :key="post"
+        :key="post.id"
         cols="12"
         sm="4"
       >
 
       <v-card
-    :loading="loading"
     class="mx-auto my-5"
     max-width="374"
   >
@@ -23,6 +22,7 @@
 
 
     <v-card-title>{{post.name}}</v-card-title>
+    <v-card-title>{{post.logDate}}</v-card-title>
 
     <v-card-text>
       <v-row
