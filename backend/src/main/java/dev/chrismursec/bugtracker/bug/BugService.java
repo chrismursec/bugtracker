@@ -1,6 +1,8 @@
 package dev.chrismursec.bugtracker.bug;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,24 +10,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class BugService {
   
-  private static final String Optional = null;
-  private final BugRepository bugRepository;
-
   @Autowired
-  public BugService(BugRepository bugRepository) {
-    this.bugRepository = bugRepository;
+  private BugDAO bugDao;
+
+  public Collection <Bug> getBugs() {
+    return bugDao.getBugs();
   }
 
-  public List<Bug> getBugs() {
-    return bugRepository.findAll();
+  public Bug createBug(Bug bug) {
+    return bugDao.createBug(bug);
   }
 
-  public void addNewBug(Bug bug) {
-    bugRepository.save(bug);
-  }
-
-  public void deleteBug(Long bugId) {
-    bugRepository.deleteById(bugId);
-  }
-
+  public Optional<Bug> deleteBugById(long id) {
+      return bugDao.deleteBugById(id);
+    }
 }

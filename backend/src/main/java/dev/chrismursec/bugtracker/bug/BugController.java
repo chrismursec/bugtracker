@@ -1,6 +1,7 @@
 package dev.chrismursec.bugtracker.bug;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,29 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/v1/bugs")
 public class BugController {
 
-  private final BugService bugService;
-
   @Autowired
-  public BugController(BugService bugService) {
-    this.bugService = bugService;
-  }
+  private BugService bugService;
+
   @CrossOrigin
   @GetMapping
-  public List<Bug> getBugs() {
-    return bugService.getBugs();
-  }
+    public Collection<Bug> getBugs() {
+      return bugService.getBugs();
+    }
+
   @CrossOrigin
   @PostMapping
-  public void addNewBug(@RequestBody Bug bug) {
-    bugService.addNewBug(bug);
+  public void postBug(@RequestBody Bug bug) {
+    bugService.createBug(bug);
   }
 
   @CrossOrigin
-  @DeleteMapping(path = "{bugId}")
-  public void deleteBug(@PathVariable Long bugId) {
-    bugService.deleteBug(bugId);
+  @DeleteMapping(path ="{bugId}")
+  public Optional<Bug> deleteBugById(@PathVariable("bugId") long id) {
+      return bugService.deleteBugById(id);
   }
-
-
-  
 }

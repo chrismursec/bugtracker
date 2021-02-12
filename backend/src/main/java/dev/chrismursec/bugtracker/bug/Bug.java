@@ -2,21 +2,17 @@ package dev.chrismursec.bugtracker.bug;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table
+@Document(collection = "bug")
 public class Bug {
 
+  @Transient
+  public static final String SEQUENCE_NAME = "bugs_sequence";
   @Id
-  @SequenceGenerator(name = "bug_sequence", sequenceName = "bug_sequence", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bug_sequence")
-  private Long id;
+  private long id;
   private String name;
   private String description;
   private int severity;
@@ -35,25 +31,11 @@ public class Bug {
     this.complete = complete;
   }
 
-
-  public Bug(Long id, String name, String description, int severity, LocalDate logDate, String notes, boolean complete) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.severity = severity;
-    this.logDate = logDate;
-    this.notes = notes;
-    this.complete = complete;
-
-  }
-
-
-
-  public Long getId() {
+  public long getId() {
     return this.id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -109,9 +91,6 @@ public class Bug {
     this.complete = complete;
   }
 
-
-
-
   @Override
   public String toString() {
     return "{" +
@@ -123,9 +102,5 @@ public class Bug {
       ", notes='" + getNotes() + "'" +
       ", complete='" + isComplete() + "'" +
       "}";
-  }
-
-
-
-  
+  }  
 }
