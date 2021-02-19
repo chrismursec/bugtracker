@@ -2,8 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import List from '../views/List.vue'
-import Add from '../views/Add.vue'
-
+import AddBug from '../views/AddBug.vue'
+import AddProject from '../views/AddProject.vue'
+import ProjectList from '../views/ProjectList.vue';
+import ViewProject from '../views/ViewProject.vue';
+import ViewBug from '../views/ViewBug.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,15 +18,34 @@ const routes = [
   {
     path: '/list',
     name: 'List',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    
     component: List
   },
+
   {
-    path: '/add',
-    name: 'Add',
-    component: Add
+    path: '/projectlist',
+    name: 'ProjectList',
+    component: ProjectList
+  },
+  {
+    path: '/addbug',
+    name: 'AddBug',
+    component: AddBug
+  },
+  {
+    path: '/addproject',
+    name: 'AddProject',
+    component: AddProject
+  },
+  {
+    path: '/project/:id',
+    name: 'Project',
+    component: ViewProject
+  },
+  {
+    path: '/bug/:id',
+    name: "Bug",
+    component: ViewBug
   }
 ]
 

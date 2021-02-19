@@ -1,5 +1,6 @@
 package dev.chrismursec.bugtracker.bug;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -22,9 +23,15 @@ public class BugController {
 
   @CrossOrigin
   @GetMapping
-    public Collection<Bug> getBugs() {
-      return bugService.getBugs();
-    }
+  public Collection<Bug> getBugs() {
+    return bugService.getBugs();
+  }
+
+  @CrossOrigin
+  @GetMapping(path = "{bugId}")
+  public Bug getBut(@PathVariable("bugId") long id) {
+    return bugService.getBug(id);
+  }
 
   @CrossOrigin
   @PostMapping
@@ -33,8 +40,21 @@ public class BugController {
   }
 
   @CrossOrigin
-  @DeleteMapping(path ="{bugId}")
-  public Optional<Bug> deleteBugById(@PathVariable("bugId") long id) {
-      return bugService.deleteBugById(id);
+  @DeleteMapping(path = "{bugId}")
+  public Bug deleteBugById(@PathVariable("bugId") long id) {
+    return bugService.deleteBugById(id);
   }
+
+  @CrossOrigin
+  @GetMapping(path = "/project/{projectId}")
+  public ArrayList<Bug> findByProjectId(@PathVariable("projectId") long id) {
+    return bugService.getByProjectId(id);
+  }
+
+  @CrossOrigin
+  @PostMapping(path = "/toggleComplete/{bugId}")
+  public Bug toggleComplete(@PathVariable("bugId") long id) {
+    return bugService.toggleComplete(id);
+  }
+
 }

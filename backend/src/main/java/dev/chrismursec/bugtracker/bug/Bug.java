@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "bug")
@@ -19,16 +20,20 @@ public class Bug {
   private LocalDate logDate;
   private String notes;
   private boolean complete;
+  private long projectId;
 
-  public Bug() {}
+  public Bug() {
+  }
 
-  public Bug(String name, String description, int severity, LocalDate logDate, String notes, boolean complete) {
+  public Bug(String name, String description, int severity, LocalDate logDate, String notes, boolean complete,
+      long projectId) {
     this.name = name;
     this.description = description;
     this.severity = severity;
     this.logDate = logDate;
     this.notes = notes;
     this.complete = complete;
+    this.projectId = projectId;
   }
 
   public long getId() {
@@ -91,16 +96,19 @@ public class Bug {
     this.complete = complete;
   }
 
+  public long getProjectId() {
+    return this.projectId;
+  }
+
+  public void setProjectId(long projectId) {
+    this.projectId = projectId;
+  }
+
   @Override
   public String toString() {
-    return "{" +
-      " id='" + getId() + "'" +
-      ", name='" + getName() + "'" +
-      ", description='" + getDescription() + "'" +
-      ", severity='" + getSeverity() + "'" +
-      ", logDate='" + getLogDate() + "'" +
-      ", notes='" + getNotes() + "'" +
-      ", complete='" + isComplete() + "'" +
-      "}";
-  }  
+    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
+        + ", severity='" + getSeverity() + "'" + ", logDate='" + getLogDate() + "'" + ", notes='" + getNotes() + "'"
+        + ", complete='" + isComplete() + "'" + ", projectId='" + getProjectId() + "'" + "}";
+  }
+
 }

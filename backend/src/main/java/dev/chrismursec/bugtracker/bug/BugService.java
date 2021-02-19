@@ -1,7 +1,7 @@
 package dev.chrismursec.bugtracker.bug;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BugService {
-  
+
   @Autowired
   private BugDAO bugDao;
 
-  public Collection <Bug> getBugs() {
+  public Collection<Bug> getBugs() {
     return bugDao.getBugs();
   }
 
@@ -21,7 +21,19 @@ public class BugService {
     return bugDao.createBug(bug);
   }
 
-  public Optional<Bug> deleteBugById(long id) {
-      return bugDao.deleteBugById(id);
-    }
+  public Bug deleteBugById(long id) {
+    return bugDao.deleteBugById(id);
+  }
+
+  public Bug getBug(long id) {
+    return bugDao.getBug(id);
+  }
+
+  public ArrayList<Bug> getByProjectId(long id) {
+    return bugDao.getBugByProjectId(id);
+  }
+
+  public Bug toggleComplete(long id) {
+    return bugDao.toggleComplete(id);
+  }
 }

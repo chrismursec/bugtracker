@@ -90,6 +90,7 @@ export default {
     axios.get(`http://localhost:8080/api/v1/bugs`)
       .then(response => {
         this.posts = response.data
+        console.log(typeof response.data)
       })
       .catch(e => {
         this.errors.push(e)
