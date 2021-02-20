@@ -8,12 +8,12 @@
     </v-row>
 
     <v-row>
-      <v-textarea outlined v-model="form['description']" prepend-icon="mdi-card-text" name="input-7-1" label="Description" auto-grow></v-textarea>
+      <v-textarea outlined v-model="form['description']" prepend-icon="mdi-card-text" name="input-7-1" label="Description" auto-grow required></v-textarea>
 
     </v-row>
 
     <v-row>
-      <v-btn class="btn mr-4" type="submit" color="light-blue">
+           <v-btn class="btn mr-4" type="submit" color="light-blue">
         submit
       </v-btn>
     </v-row>
@@ -23,8 +23,10 @@
 </template>
 
 <style scoped>
+
   .btn {
     width: 100%;
+
   }
   form {
     padding: 2em;

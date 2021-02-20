@@ -18,6 +18,7 @@ public class Bug {
   private String description;
   private int severity;
   private LocalDate logDate;
+  private LocalDate dueDate;
   private String notes;
   private boolean complete;
   private long projectId;
@@ -25,12 +26,13 @@ public class Bug {
   public Bug() {
   }
 
-  public Bug(String name, String description, int severity, LocalDate logDate, String notes, boolean complete,
-      long projectId) {
+  public Bug(String name, String description, int severity, LocalDate logDate, LocalDate dueDate, String notes,
+      boolean complete, long projectId) {
     this.name = name;
     this.description = description;
     this.severity = severity;
     this.logDate = logDate;
+    this.dueDate = dueDate;
     this.notes = notes;
     this.complete = complete;
     this.projectId = projectId;
@@ -74,6 +76,14 @@ public class Bug {
 
   public void setLogDate(LocalDate logDate) {
     this.logDate = logDate;
+  }
+
+  public LocalDate getDueDate() {
+    return this.dueDate;
+  }
+
+  public void setDueDate(LocalDate dueDate) {
+    this.dueDate = dueDate;
   }
 
   public String getNotes() {

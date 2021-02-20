@@ -2,8 +2,6 @@
   <ProjectForm/>
 </template>
 
-
-
 <script>
   import ProjectForm from '../components/ProjectForm';
 

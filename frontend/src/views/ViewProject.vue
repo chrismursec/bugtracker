@@ -6,22 +6,22 @@
 
   <v-data-table :headers="headers" :items="bugList" :items-per-page="5" class="elevation-5 mt-5">
 
-    <template v-slot:item.name="{item}">
+    <template v-slot:[`item.name`]="{item}">
              <router-link class="nav-link" :to="{path: '/bug/' + item.id}">{{item.name}}</router-link>
 
     </template>
 
-    <template v-slot:item.complete="{ item }">
+    <template v-slot:[`item.complete`]="{ item }">
       <v-chip :color="getColor(item.complete)" dark @click="completeTask(item.id)">
         {{ item.complete ? "Done" : "Open" }}
       </v-chip>
     </template>
 
-    <template v-slot:item.severity="{ item }">
+    <template v-slot:[`item.severity`]="{ item }">
       <v-rating color="amber" dense half-increments readonly size="14" :value="item.severity"></v-rating>
     </template>
 
-    <template v-slot-:iten.logDate="{ item }">
+    <template v-slot-:[`item.logDate`]="{ item }">
       <p>item.logDate</p>
     </template>
 
@@ -77,7 +77,6 @@ export default {
         }
       ],
     }
-
   },
 
   created() {

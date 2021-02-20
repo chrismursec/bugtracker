@@ -6,7 +6,8 @@ import AddBug from '../views/AddBug.vue'
 import AddProject from '../views/AddProject.vue'
 import ProjectList from '../views/ProjectList.vue';
 import ViewProject from '../views/ViewProject.vue';
-import ViewBug from '../views/ViewBug.vue'
+import ViewBug from '../views/ViewBug.vue';
+import Calendar from '../views/Calendar.vue';
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,6 +47,11 @@ const routes = [
     path: '/bug/:id',
     name: "Bug",
     component: ViewBug
+  },
+  {
+    path: '/calendar',
+    name: 'Calendar',
+    component: Calendar 
   }
 ]
 

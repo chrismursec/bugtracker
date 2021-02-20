@@ -4,29 +4,35 @@
   <form @submit.prevent="submit" class="elevation-3">
 
     <v-row>
-      <h1 class="mb-5">Add new bug</h1>    
+      <h2 class="mb-5">Add new bug</h2>
     </v-row>
 
     <v-row>
+      <v-col cols="12" sm="6">
+        <v-text-field outlined v-model="form['name']" prepend-icon="mdi-bug" label="Name" required>
+        </v-text-field>
+      </v-col>
 
-      <v-text-field outlined v-model="form['name']" prepend-icon="mdi-bug" label="Name" required>
-      </v-text-field>
-    </v-row>
-
-    <v-row>
-      <v-textarea outlined v-model="form['description']" prepend-icon="mdi-card-text" name="input-7-1" label="Description" auto-grow></v-textarea>
-    </v-row>
-
-    <v-row>
-      <v-textarea outlined v-model="form['notes']" prepend-icon="mdi-note-multiple" name="input-7-1" label="Recreation Steps" auto-grow></v-textarea>
-
-    </v-row>
-
-    <v-row justify="center">
       <v-col cols="12" sm="6">
         <v-select outlined prepend-icon="mdi-source-repository" v-model="form['project']" :items="projects" item-text="name" item-value="id" label="Parent Project" persistent-hint single-line></v-select>
-
       </v-col>
+    </v-row>
+
+
+
+    <v-row>
+      <v-col cols="12" sm="6">
+        <v-textarea outlined v-model="form['description']" prepend-icon="mdi-card-text" name="input-7-1" label="Description" auto-grow></v-textarea>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <v-textarea outlined v-model="form['notes']" prepend-icon="mdi-note-multiple" name="input-7-1" label="Recreation Steps" auto-grow></v-textarea>
+      </v-col>
+    </v-row>
+
+  
+
+
+    <v-row justify="center">
       <v-col cols="12" sm="6">
         <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date" transition="scale-transition" offset-y min-width="auto">
           <template v-slot:activator="{ on, attrs }">
@@ -44,11 +50,30 @@
         </v-menu>
       </v-col>
 
+      <v-col cols="12" sm="6">
+        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" :return-value.sync="dueDate" transition="scale-transition" offset-y min-width="auto">
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field outlined v-model="dueDate" label="Due Date" prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
+          </template>
+          <v-date-picker v-model="dueDate" no-title scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="menu1 = false">
+              Cancel
+            </v-btn>
+            <v-btn text color="primary" @click="$refs.menu1.save(dueDate)">
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+      </v-col>
     </v-row>
-    <v-slider class="slider mt-8" prepend-icon="mdi-star" v-model="form['severity']" :label="ex3.label" :thumb-color="ex3.color" thumb-label="always" max="5" min="1"></v-slider>
+
 
     <v-row>
+        <v-slider class="slider mt-8" prepend-icon="mdi-star" v-model="form['severity']" :label="ex3.label" :thumb-color="ex3.color" thumb-label="always" max="5" min="1"></v-slider>
     </v-row>
+
+
 
     <v-row>
       <v-btn class="btn mt-4 " type="submit" color="light-blue">
@@ -82,8 +107,10 @@ export default {
   data() {
     return {
       date: new Date().toISOString().substr(0, 10),
+      dueDate: new Date().toISOString().substr(0, 10),
 
       menu: false,
+      menu1: false,
       form: {},
 
       ex3: {
@@ -113,6 +140,7 @@ export default {
         description: this.form.description,
         severity: this.form.severity,
         logDate: this.date,
+        dueDate: this.dueDate,
         notes: this.form.notes,
         complete: false,
         projectId: this.form.project
